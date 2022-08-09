@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,12 +23,37 @@ class Home extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Enter the city",
-                        style: GoogleFonts.dmSans(fontSize: 18)),
+                    Text("City",
+                        style: GoogleFonts.dmSans(
+                            fontSize: 19, letterSpacing: 0.2)),
                   ],
                 ),
               ),
-              SizedBox(height: 30, width: 30),
+              SizedBox(height: 20, width: 0),
+              SizedBox(
+                width: 280,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.location_on, size: 30,
+                        color: Colors.grey,
+                        // size: 16,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      )),
+                ),
+              ),
+              SizedBox(height: 20, width: 15),
+              Container(
+                  width: 120,
+                  child: ElevatedButton(
+                    child: Text(
+                      "Submit",
+                      style: GoogleFonts.poppins(letterSpacing: 1),
+                    ),
+                    onPressed: () {},
+                  ))
             ],
           )
         ],

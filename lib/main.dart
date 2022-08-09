@@ -16,7 +16,7 @@ class Myapp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(13, 117, 191, 0.8),
-          title: Text('Weather App 🌤', style: GoogleFonts.poppins()),
+          title: Text('Weather', style: GoogleFonts.poppins()),
           centerTitle: true,
         ),
         drawer: Drawer(
@@ -25,6 +25,12 @@ class Myapp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              //   CircleAvatar(
+              //   backgroundImage: NetworkImage(
+              //       'https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/homepage/families-gallery/2022/04_12/family_chooser_tecnica_m.png'),
+              // ),
+              SizedBox(height: 13, width: 13),
+
               SafeArea(
                 child: Text(
                   'Made with❤by Amal Ganesh',
