@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'home.dart';
 
 void main() {
   runApp(Myapp());
@@ -13,12 +15,13 @@ class Myapp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Weather App 🌞', style: GoogleFonts.notoSans()),
+          backgroundColor: Color.fromRGBO(13, 117, 191, 0.8),
+          title: Text('Weather App 🌤', style: GoogleFonts.poppins()),
           centerTitle: true,
         ),
         drawer: Drawer(
-          elevation: 3,
-          backgroundColor: Colors.blueGrey[50],
+          elevation: 0,
+          backgroundColor: Colors.grey.withOpacity(0.2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -27,7 +30,17 @@ class Myapp extends StatelessWidget {
                   'Made with❤by Amal Ganesh',
                   style: GoogleFonts.cookie(
                     textStyle: TextStyle(
-                        color: Colors.black, letterSpacing: 1.2, fontSize: 19),
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(2.0, -1.0),
+                          blurRadius: 3.0,
+                          color: Color.fromRGBO(0, 0, 0, 0.8),
+                        ),
+                      ],
+                      color: Colors.white,
+                      letterSpacing: 1.2,
+                      fontSize: 19,
+                    ),
                   ),
                 ),
               ),
@@ -38,19 +51,6 @@ class Myapp extends StatelessWidget {
         body: SafeArea(
           child: Home(),
         ),
-      ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [Column()],
       ),
     );
   }
