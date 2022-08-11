@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home.dart';
+import 'package:weather/weather.dart';
+import 'package:http/http.dart';
+import 'weather.dart';
+import 'package:json_serializable/json_serializable.dart';
 
 void main() {
   runApp(Myapp());
@@ -25,12 +29,11 @@ class Myapp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              //   CircleAvatar(
+              // CircleAvatar(
               //   backgroundImage: NetworkImage(
               //       'https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/homepage/families-gallery/2022/04_12/family_chooser_tecnica_m.png'),
               // ),
               SizedBox(height: 13, width: 13),
-
               SafeArea(
                 child: Text(
                   'Made with❤by Amal Ganesh',
