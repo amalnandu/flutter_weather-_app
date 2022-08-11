@@ -69,9 +69,9 @@ class _HomeState extends State<Home> {
                       style: GoogleFonts.poppins(letterSpacing: 0.4),
                     ),
                   ),
-                  onPressed: () async {
+                  onPressed: () {
                     displayText = textController.text;
-                    final redu = await getWeatherInfo(cityName: displayText);
+                    final redu = getWeatherInfo(cityName: displayText);
                     print(displayText);
                   },
                 ),

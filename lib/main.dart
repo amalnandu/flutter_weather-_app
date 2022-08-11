@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home.dart';
-import 'package:weather/weather.dart';
-import 'package:http/http.dart';
+
 import 'weather.dart';
-import 'package:json_serializable/json_serializable.dart';
 
 void main() {
   runApp(Myapp());
