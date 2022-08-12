@@ -1,9 +1,11 @@
 // import 'dart:ui';
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
 import 'weather.dart';
 
 class Home extends StatefulWidget {
@@ -14,11 +16,57 @@ class Home extends StatefulWidget {
 }
 
 String nandu = "";
+String amal = " ";
+String pre = ' ';
+String cloudinfo = ' ';
 
 class _HomeState extends State<Home> {
   TextEditingController textController = TextEditingController();
   String displayText = "";
   String place = "";
+
+  bool isLoaded = false;
+  num? temp;
+  num? press;
+  num? cover;
+  String? appid;
+  getCityWeather({required String cityname}) async {
+    var client = http.Client();
+    var uri =
+        'http://api.openweathermap.org/data/2.5/weather?q=$cityname&APPID=$appid';
+
+    // ----------------------------------------------------------------
+    //  Place your app id in the app id field
+    // ----------------------------------------------------------------
+
+    var url = Uri.parse(uri);
+    var response = await client.get(url);
+    if (response.statusCode == 200) {
+      var data = response.body;
+      var decodeData = jsonDecode(data);
+//      print(data);
+      updateUI(decodeData);
+      setState(() {
+        isLoaded = true;
+      });
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  updateUI(var decodedData) {
+    setState(() {
+      if (decodedData == null) {
+        temp = 0;
+        press = 0;
+        cover = 0;
+      } else {
+        temp = decodedData['main']['temp'] - 273;
+        press = decodedData['main']['pressure'];
+        cover = decodedData['clouds']['all'];
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +117,27 @@ class _HomeState extends State<Home> {
                       style: GoogleFonts.poppins(letterSpacing: 0.4),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     displayText = textController.text;
-                    final redu = getWeatherInfo(cityName: displayText);
-                    print(displayText);
+                    // final result = getWeatherInfo(cityName: displayText);
+                    // print(displayText);
+
+                    getCityWeather(cityname: displayText);
+                    setState(() async {
+                      temp = (temp! * 100).round() / 100.0;
+
+                      nandu = temp.toString();
+                      amal = "celsius";
+                      pre = press.toString();
+                      cloudinfo = "$cover";
+                    });
                   },
                 ),
               ),
               SizedBox(
                 height: 35,
               ),
-              Center(
+              Container(
                 child: Weatherui(),
               )
             ],
@@ -100,12 +158,29 @@ class Weatherui extends StatefulWidget {
 class _WeatheruiState extends State<Weatherui> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text(
-          "$nandu  ",
-          style: TextStyle(fontSize: 22),
-        ),
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "$nandu $amal",
+            style: TextStyle(fontSize: 23, fontStyle: FontStyle.italic),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text("$pre"),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "$cloudinfo",
+            style: TextStyle(fontSize: 23, fontStyle: FontStyle.italic),
+          ),
+        ],
       ),
     );
   }
